@@ -1,5 +1,5 @@
 import PageHeader from "@/components/page-header"
-import Trend from "@/components/trend"
+import TransactionItem from "@/components/transaction-item"
 
 function Page() {
   return (
@@ -14,13 +14,13 @@ function Page() {
       </div>
 
       <div>
-        <h2 className="mb-4 text-lg font-mono">Trend</h2>
+        <h2 className="mb-4 text-lg font-mono">TransactionItem</h2>
         <hr className="mb-4 border-gray-200 dark:border-gray-800"/>
-        <div className="flex space-x-8">
-          <Trend type="Income" amount={1000} prevAmount={900}/>         
-          <Trend type="Expense" amount={12000} prevAmount={10000}/>      
-          <Trend type="Investment" amount={7000} prevAmount={11100}/>       
-          <Trend type="Saving" amount={500} prevAmount={950}/>
+        <div className="space-y-4">
+          <TransactionItem type="Income" category="Salary" description="Monthly Salary" amount={500000} date="2023-10-01" />
+          <TransactionItem type="Expense" category="Food" description="Going out to eat" amount={2900} date="2023-10-01" />
+          <TransactionItem type="Saving" category="For children" description="Monthly Salary" amount={10000} date="2023-10-01" />
+          <TransactionItem type="Investment" description="Udemy" amount={4000} date="2023-10-01" />
         </div>
       </div>
     </main>
