@@ -1,5 +1,8 @@
 import Button from "@/components/button"
+import Input from "@/components/input"
+import Label from "@/components/label"
 import PageHeader from "@/components/page-header"
+import Select from "@/components/select"
 import TransactionItem from "@/components/transaction-item"
 import TransactionSummaryItem from '@/components/transaction-summary-item'
 import Trend from "@/components/trend"
@@ -50,7 +53,7 @@ function Page() {
         </div>
       </div>
 
-            <div>
+      <div>
         <h2 className="mb-4 text-lg font-mono">Buttons</h2>
         <hr className="mb-4 border-gray-200 dark:border-gray-800"/>
         <div className="space-x-4">
@@ -61,6 +64,32 @@ function Page() {
           <Button size="xs">Click me!</Button>
           <Button size="sm">Click me!</Button>
           <Button size="lg">Click me!</Button>
+        </div>
+      </div>
+
+      <div>
+        <h2 className="mb-4 text-lg font-mono">Forms</h2>
+        <hr className="mb-4 border-gray-200 dark:border-gray-800"/>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <Label className="block mb-1" htmlFor="name">Your name</Label>
+            <Input type="text" id="name" placeholder="Type something in here"/>
+          </div>
+
+          <div>
+            <Label className="block mb-1" htmlFor="city">City</Label>
+            <Select id="city">
+              <option>Budapest</option>
+              <option>London</option>
+              <option>New York</option>
+              <option>Tokyo</option>
+            </Select>
+          </div>
+
+          <div className="flex items-center">            
+            <Input type="checkbox" id="terms"/>
+            <Label className="ml-2" htmlFor="terms">Accept terms</Label>
+          </div>
         </div>
       </div>
       
