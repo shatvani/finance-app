@@ -1,7 +1,9 @@
+const { default: TransactionList } = require("./components/transaction-list");
+
 function Page() {
   return (
     <>
-      Hello from the dashboard
+      <TransactionList />
     </>
   )
 }

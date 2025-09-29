@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import useServerDarkMode from "@/hooks/use-server-dark-mode";
+import CookiesProviderClient from '../components/cookies-provider-client'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,12 +19,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const theme = useServerDarkMode();
   return (
-    <html lang="en">
+    <html lang="en" className={theme}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-        {children}
+        <CookiesProviderClient>
+          {children}
+        </CookiesProviderClient>
       </body>
     </html>
   );
