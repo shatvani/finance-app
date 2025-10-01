@@ -12,13 +12,12 @@ const groupAndSumTransactionsByDate = (transactions) => {
     map.set(date, entry);
   }
   // ha objektum kell vissza:
-  //return Object.fromEntries(map.entries());
-  return map.entries();
+  return Object.fromEntries(map.entries());
 };
 
 async function TransactionList() {
   
-  const response = await fetch('http://localhost:3100/transactions', { cache: 'no-store' })
+  const response = await fetch('http://localhost:3100/transactions', { cache: 'no-store' } )
 
   const transactions = await response.json()
 
@@ -26,7 +25,7 @@ async function TransactionList() {
 
   return (
     <div className="space-y-8">
-      {grouped
+      {Object.entries(grouped)
         .map(([date, { transactions, amount }]) =>
           <div key={date}>
             <TransactionSummaryItem date={date} amount={amount} />
