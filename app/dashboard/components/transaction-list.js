@@ -17,7 +17,7 @@ const groupAndSumTransactionsByDate = (transactions) => {
 
 async function TransactionList() {
   
-  const response = await fetch('http://localhost:3100/transactions', { cache: 'no-store' } )
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, { cache: 'no-store' } )
 
   const transactions = await response.json()
 
