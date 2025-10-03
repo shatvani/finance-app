@@ -31,7 +31,7 @@ function DarModeToggle({defaultMode = 'dark'}) {
   };
 
   return (
-    <Button className="hover" variant="ghost" size="sm" onClick={toggleTheme}>
+    <Button aria-label="Dark mode toggle" className="hover" variant="ghost" size="sm" onClick={toggleTheme}>
       {resolvedDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
     </Button>
   )
