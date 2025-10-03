@@ -11,6 +11,7 @@ import { transactionSchema } from "@/lib/validation"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { purgeTransactionListCache } from "@/lib/actions"
+import FormError from "@/components/form-error"
 
 function TransactionForm() {
   const {
@@ -54,32 +55,33 @@ function TransactionForm() {
           <Select id="type" {...register("type")}>
             {types.map((type) => <option key={type}>{type}</option>)} 
           </Select>   
-          {errors.type && <p className="text-sm text-red-500 mt-1">{errors.type.message}</p>}       
+          <FormError error={errors.type} />      
         </div>
 
         <div>
           <Label htmlFor="category" className="mb-1">Cagegory</Label>
           <Select id="category" {...register("category")}>
-            {categories.map((categorie) => <option key={categorie}>{categorie}</option>)} 
+            {categories.map((category) => <option key={category}>{category}</option>)} 
           </Select>
+          <FormError error={errors.category} />
         </div>
 
         <div>
           <Label htmlFor="created_at" className="mb-1">Date</Label>
           <Input id="created_at" {...register("created_at")}/>
-          {errors.created_at && <p className="text-sm text-red-500 mt-1">{errors.created_at.message}</p>}
+          <FormError error={errors.created_at} />
         </div>
 
         <div>
           <Label htmlFor="amount" className="mb-1">Amount</Label>
           <Input id="amount" type="number" {...register("amount")} />
-          {errors.amount && <p className="text-sm text-red-500 mt-1">{errors.amount.message}</p>}
+          <FormError error={errors.amount} />    
         </div>
 
         <div className="col-span-1 md:col-span-2">
           <Label htmlFor="description" className="mb-1">Description</Label>
           <Input id="description" {...register("description")} />
-          {errors.description && <p className="text-sm text-red-500 mt-1">{errors.description.message}</p>}
+          <FormError error={errors.description} />    
         </div>
       </div>
 
