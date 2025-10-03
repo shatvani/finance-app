@@ -8,6 +8,7 @@ import { types, categories } from "@/lib/consts"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { transactionSchema } from "@/lib/validation"
+import { useState } from "react"
 
 function TransactionForm() {
   const {
@@ -20,7 +21,25 @@ function TransactionForm() {
     resolver: zodResolver(transactionSchema),
   })
 
-  const onSubmit = data => console.log(data)
+  const [isSaving, setIsSaving] = useState(false)
+
+  const onSubmit = async (data) => {
+    setIsSaving(true)
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...data,
+          created_at: `${data.created_at}T00:00:00.000Z`,
+        }),
+      })
+    } finally {
+      setIsSaving(false)
+    }
+  }
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
@@ -28,14 +47,15 @@ function TransactionForm() {
         <div>
           <Label htmlFor="type" className="mb-1">Type</Label>
           <Select id="type" {...register("type")}>
-            {types.map((type) => <option key={type.value} value={type.value}>{type.label}</option>)} 
-          </Select>          
+            {types.map((type) => <option key={type}>{type}</option>)} 
+          </Select>   
+          {errors.type && <p className="text-sm text-red-500 mt-1">{errors.type.message}</p>}       
         </div>
 
         <div>
           <Label htmlFor="category" className="mb-1">Cagegory</Label>
           <Select id="category" {...register("category")}>
-            {categories.map((categorie) => <option key={categorie.value} value={categorie.value}>{categorie.label}</option>)} 
+            {categories.map((categorie) => <option key={categorie}>{categorie}</option>)} 
           </Select>
         </div>
 
@@ -59,7 +79,7 @@ function TransactionForm() {
       </div>
 
       <div className="flex justify-end">
-        <Button type="submit">Save</Button>
+        <Button type="submit" disabled={isSaving}>Save</Button>
       </div>
     </form>
   )
