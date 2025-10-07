@@ -1,7 +1,7 @@
 import { useFormatCurrency } from "@/hooks/use-format-currency";
-import { HandCoins, Wallet, PiggyBank, Landmark } from "lucide-react";
+import { HandCoins, Wallet, PiggyBank, Landmark, Pencil } from "lucide-react";
 
-function TransactionItem({type, category, description, amount, date}) {
+function TransactionItem({type, category, description, amount}) {
   const typesMap = {
     'Income': {
       icon: HandCoins,
@@ -20,6 +20,7 @@ function TransactionItem({type, category, description, amount, date}) {
       colors: 'text-yellow-500 dark:text-yellow-400'
     }
   }
+
   const IconComponent = typesMap[type].icon
   const colors = typesMap[type].colors
   const formattedAmount = useFormatCurrency(amount);
